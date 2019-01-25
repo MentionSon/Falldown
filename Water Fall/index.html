@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>瀑布流</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="wrap" id="wrap">
+       
+        <div class="layer">
+            <div class="photo-box"><img src="img/1.jpg" alt="" class="aaa"></div>
+        </div>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/script.js"></script>
+    <script>
+        window.onload = function() {
+            let wrap = document.querySelector('.wrap');
+            console.log(wrap);
+            window.setPhotos(data);
+            let boxes = wrap.querySelectorAll('.photo');
+            document.addEventListener('scroll',() => {
+                if (window.getCheck()) {
+                    setTimeout(() => {
+                        window.setPhotos(data);
+                    },200);                 
+                }          
+            });
+            wrap.addEventListener('click', ({target}) => {
+                //if (target.nodeName !== 'IMG') return;
+                console.log('a~~~');
+                document.querySelector('.layer').style.display = 'block';
+                document.querySelector('.photo-box').style.width = document.querySelector('.aaa').clientWidth + 10 + 'px';
+                document.querySelector('.photo-box').style.marginTop = -(document.querySelector('.aaa').clientHeight/2 + 5) + 'px';
+                document.querySelector('.photo-box').style.marginLeft = -(document.querySelector('.aaa').clientWidth/2 + 5) + 'px';
+                console.log(document.querySelector('.aaa').clientWidth);
+                console.log(target);
+
+                // if (target.className === 'layer') {
+                    
+                //     setTimeout(() => {
+                //         document.querySelector('.layer').style.display = 'none';
+                //     },1000);
+                    
+                // }
+            });
+        }
+        
+    </script>
+</body>
+</html>
