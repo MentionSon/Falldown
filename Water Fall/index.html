@@ -11,7 +11,7 @@
     <div class="wrap" id="wrap">
        
         <div class="layer">
-            <div class="photo-box"><img src="img/1.jpg" alt="" class="aaa"></div>
+            <div class="photo-box"></div>
         </div>
     </div>
 
@@ -20,7 +20,6 @@
     <script>
         window.onload = function() {
             let wrap = document.querySelector('.wrap');
-            console.log(wrap);
             window.setPhotos(data);
             let boxes = wrap.querySelectorAll('.photo');
             document.addEventListener('scroll',() => {
@@ -31,22 +30,35 @@
                 }          
             });
             wrap.addEventListener('click', ({target}) => {
-                //if (target.nodeName !== 'IMG') return;
-                console.log('a~~~');
-                document.querySelector('.layer').style.display = 'block';
-                document.querySelector('.photo-box').style.width = document.querySelector('.aaa').clientWidth + 10 + 'px';
-                document.querySelector('.photo-box').style.marginTop = -(document.querySelector('.aaa').clientHeight/2 + 5) + 'px';
-                document.querySelector('.photo-box').style.marginLeft = -(document.querySelector('.aaa').clientWidth/2 + 5) + 'px';
-                console.log(document.querySelector('.aaa').clientWidth);
                 console.log(target);
+                //if (target.nodeName !== 'IMG') return;
+                let layer = document.querySelector('.layer');
+                let box = document.querySelector('.photo-box');
 
-                // if (target.className === 'layer') {
-                    
-                //     setTimeout(() => {
-                //         document.querySelector('.layer').style.display = 'none';
-                //     },1000);
-                    
-                // }
+                if (target.nodeName === 'IMG') {
+                    layer.style.display = 'block';             
+                    let img = document.createElement('img');
+                    console.log(target.src);
+                    img.className = 'aaa';
+                    img.src = target.src; 
+                    img.style.width = '100%';                
+                    box.appendChild(img);
+                    let iWidth = img.clientWidth;
+                    console.log(iWidth);
+                    //if (iWidth > 1080) return;
+                    // img.clientWidth = (iWidth > 1080) ? 1080 + 'px' : img.clientWidth + 'px';
+                    box.style.width = img.clientWidth + 10 + 'px';
+                    box.style.marginTop = -(img.clientHeight/2 + 5) + 'px';
+                    box.style.marginLeft = -(img.clientWidth/2 + 5) + 'px';                   
+                    console.log(target);
+                }               
+                if (target.className === 'layer') {
+                    let img = box.querySelector('img');
+                    box.removeChild(img);     
+                    setTimeout(() => {
+                        layer.style.display = 'none';                 
+                    },100);                  
+                }
             });
         }
         

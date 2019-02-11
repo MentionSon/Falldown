@@ -57,6 +57,7 @@ body {
 .photo-box{
     width: auto;
     height: auto;
+    max-width: 580px;
     position: fixed;
     left: 50%;
     top: 50%;

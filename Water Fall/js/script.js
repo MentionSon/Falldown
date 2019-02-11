@@ -1,15 +1,12 @@
-(function(window, document) {
+;(function(window, document) {
     let setPhotos = function(data) {
         //生成页面的图片结构
         data.forEach(({caption, url}) => {
             let photoWrap = document.createElement('div');
             let photo = document.createElement('img');
-            //let p = document.createElement('p');
             photo.src = url;
-            //p.innerText = caption;
             photoWrap.className = 'photo';
             photoWrap.appendChild(photo);
-            //photoWrap.appendChild(p);
             wrap.appendChild(photoWrap);
         });
         waterFall(wrap,document.querySelectorAll('.photo'));
@@ -38,7 +35,7 @@
                         boxes[i].style.position = 'absolute';
                         boxes[i].style.left = leftValue + 'px';
                         boxes[i].style.top = minHeight + 'px';
-                        colHeight[minIndex] += boxes[i].offsetHeight + 20;           
+                        colHeight[minIndex] += boxes[i].offsetHeight + 20;
                 }
             } 
             
@@ -46,6 +43,7 @@
           
     };
 
+    /* 检测当前最后一张图片的高度是否大于整个视窗滚动的高度 */
     let getCheck = function() {
             let docHeight = document.documentElement.clientHeight;
             let scrollHeight = document.documentElement.scrollTop;
@@ -63,6 +61,7 @@
         
     }
 
+    /* 查询图片高度数组中最小高度的索引 */
     function getIndex(minHeight, colHeight) {
         for (let i in colHeight) {
             if (colHeight[i] === minHeight) {
